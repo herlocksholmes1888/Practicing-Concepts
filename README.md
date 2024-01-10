@@ -1,0 +1,4 @@
+## Hello! Welcome to "Practicing Concepts"!
+The purpose of this repository isn't to showcase a particular project. It is also not to be the most well organized of repositories on my account, although I do try to keep it fairly simple to understand.
+What you will find here are a couple of my personal attempts at fixating a programming concept I just learned (generally in Python, since that is the programming language I aspire to know the most about) with a challenge either I or a third party posed to myself.
+Due to that specific purpouse, I do recommend dropping this repository and going to look for another, a more user-friendly one, if you are not familiar with developing and its many concepts. If you ARE familiar with those, I hope you enjoy the small scale projects I managed to code to refresh them in my memory! 
