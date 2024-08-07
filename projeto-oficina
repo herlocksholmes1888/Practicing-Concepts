@@ -1,0 +1,75 @@
+CREATE TABLE cliente(
+    idcliente INT PRIMARY KEY,
+    nomecliente VARCHAR(50) NOT NULL,
+    id_carro INT UNIQUE
+);
+
+CREATE TABLE telefone(
+    idtelefone INT PRIMARY KEY,
+    numero VARCHAR(30),
+    id_cliente INT
+);
+
+CREATE TABLE marca(
+    idmarca INT PRIMARY KEY,
+    marca VARCHAR(30) NOT NULL UNIQUE
+);
+
+CREATE TABLE carro(
+    idcarro INT PRIMARY KEY,
+    modelo VARCHAR(30) NOT NULL,
+    placa VARCHAR(30) NOT NULL UNIQUE,
+    id_marca INT 
+);
+
+CREATE TABLE cor(
+    idcor INT PRIMARY KEY,
+    nomecor VARCHAR(30) UNIQUE
+);
+
+CREATE TABLE carro_cor(
+    id_carro INT,
+    id_cor INT,
+    PRIMARY KEY(id_carro, id_cor)    
+);
+
+ALTER TABLE telefone
+ADD CONSTRAINT fk_telefone_cliente
+FOREIGN KEY(id_cliente)
+REFERENCES cliente(idcliente);
+
+ALTER TABLE cliente
+ADD CONSTRAINT fk_cliente_carro
+FOREIGN KEY(id_carro)
+REFERENCES carro(idcarro);
+
+ALTER TABLE carro
+ADD CONSTRAINT fk_carro_marca
+FOREIGN KEY(id_marca)
+REFERENCES marca(idmarca);
+
+ALTER TABLE carro_cor
+ADD CONSTRAINT fk_cor
+FOREIGN KEY(id_cor)
+REFERENCES cor(idcor);
+
+ALTER TABLE carro_cor
+ADD CONSTRAINT fk_carro
+FOREIGN KEY(id_carro)
+REFERENCES carro(idcarro);
+
+INSERT INTO cliente(idcliente, nomecliente) VALUES(1, 'Arsène Lupin III');
+INSERT INTO carro(idcarro, modelo, placa) VALUES(1, 'Fiat 500', 'R-33');
+
+UPDATE cliente 
+SET id_carro = 1
+WHERE idcliente = 1;
+
+UPDATE carro
+SET id_marca = 'Fiat'
+WHERE idcarro = 1;
+
+INSERT INTO carro(idcarro, modelo, placa, id_marca) VALUES(2, 'Mobi', 'EDM666', 1);
+
+// Não funciona, devido à constraint fk_carro_marca
+INSERT INTO carro(idcarro, modelo, placa, id_marca) VALUES(3, 'Mobi', 'EDM999', 5);
